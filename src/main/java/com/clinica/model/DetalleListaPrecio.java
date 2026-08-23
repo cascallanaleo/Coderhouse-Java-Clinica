@@ -52,6 +52,14 @@ public class DetalleListaPrecio {
         this.precio = precio;
     }
 
+    public Long getId() {
+        return idDetalleListaPrecio;
+    }
+
+    public void setId(Long id) {
+        this.idDetalleListaPrecio = id;
+    }
+
     @Override
     public String toString() {
         return "DetalleListaPrecio{" +  
