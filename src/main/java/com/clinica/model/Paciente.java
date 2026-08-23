@@ -1,5 +1,5 @@
 
-package com.example.model;
+package com.clinica.model;
 
 import jakarta.persistence.Entity; //Permite convertir la clase en entidad
 import jakarta.persistence.GeneratedValue; //permite generar el id automáticamente
@@ -13,7 +13,7 @@ public class Paciente {
     @Id //marca el atributo id como clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) //generar el id automáticamente
     
-    private Long id; //guarda el atributo identificador del Paciente
+    private Long idPaciente; //guarda el atributo identificador del Paciente
     private String nombre; 
     private String domicilio;
     private String celular;
@@ -26,12 +26,12 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public void setId(Long id) { 
-        this.id = id;
+    public void setId(Long idPaciente) { 
+        this.idPaciente = idPaciente;
     }
 
     public Long getId() { 
-        return id;
+        return idPaciente;
     }
 
     public String getNombre() { 
@@ -76,7 +76,7 @@ public class Paciente {
 @Override
     public String toString() { 
         return "Paciente{" +
-                "id=" + id +
+                "idPaciente=" + idPaciente +
                 ", nombre='" + nombre + '\'' +
                 ", domicilio='" + domicilio + '\'' +
                 ", celular='" + celular + '\'' +

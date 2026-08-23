@@ -1,4 +1,4 @@
-package com.example.model;
+package com.clinica.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class ListaPrecio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idListaPrecio;
     private String descripcion;
     private LocalDate vigencia;
 
@@ -23,11 +23,11 @@ public class ListaPrecio {
     }
 
     public Long getId() {
-        return id;
+        return idListaPrecio;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idListaPrecio) {
+        this.idListaPrecio = idListaPrecio;
     }
 
     public String getDescripcion() {
@@ -49,7 +49,7 @@ public class ListaPrecio {
     @Override
     public String toString() {
         return "ListaPrecio{" +
-                "id=" + id +
+                "idListaPrecio=" + idListaPrecio +
                 ", descripcion='" + descripcion + '\'' +
                 ", vigencia=" + vigencia +
                 '}';
