@@ -1,0 +1,634 @@
+{
+  "info": {
+    "name": "Clinica - Entrega Final",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Ejecutar en orden (01 al 23) con la aplicacion recien iniciada."
+  },
+  "item": [
+    {
+      "name": "01 - Crear paciente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/paciente",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "paciente"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"domicilio\": \"Calle 123\",\n  \"celular\": \"2235551234\",\n  \"fechaNacimiento\": \"1990-05-10\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "02 - Crear prestacion (stock 10)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/prestacion",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "prestacion"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"descripcion\": \"Consulta clinica\",\n  \"categoria\": \"Consultas\",\n  \"stock\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "03 - Crear lista de precios",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/listaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listaprecio"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"descripcion\": \"Lista 2026\",\n  \"vigencia\": \"2026-01-01\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "04 - Cargar precio de la prestacion ($1000)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"listaPrecio\": {\n    \"id\": 1\n  },\n  \"prestacion\": {\n    \"id\": 1\n  },\n  \"precio\": 1000.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "05 - Comprobante OK (2 unidades)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paciente\": {\n    \"id\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 2,\n      \"prestacion\": {\n        \"id\": 1\n      }\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve 201 con total 2000, cantidadProductos 2 y la fecha. El stock baja a 8."
+      }
+    },
+    {
+      "name": "06 - Ver stock de la prestacion (debe ser 8)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/prestacion/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "prestacion",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "07 - Error: paciente inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paciente\": {\n    \"id\": 999\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1,\n      \"prestacion\": {\n        \"id\": 1\n      }\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve 400 con el mensaje del error."
+      }
+    },
+    {
+      "name": "08 - Error: prestacion inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paciente\": {\n    \"id\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1,\n      \"prestacion\": {\n        \"id\": 999\n      }\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve 400 con el mensaje del error."
+      }
+    },
+    {
+      "name": "09 - Error: stock insuficiente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paciente\": {\n    \"id\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1000,\n      \"prestacion\": {\n        \"id\": 1\n      }\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve 400 con el mensaje del error."
+      }
+    },
+    {
+      "name": "10 - Cambiar precio de la prestacion ($1500)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"listaPrecio\": {\n    \"id\": 1\n  },\n  \"prestacion\": {\n    \"id\": 1\n  },\n  \"precio\": 1500.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "11 - Ver comprobante 1 (conserva el precio de $1000)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "\"Aunque el precio cambio, el comprobante 1 sigue con precioUnitario 1000.\"",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "12 - Comprobante nuevo (usa el precio nuevo $1500)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paciente\": {\n    \"id\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1,\n      \"prestacion\": {\n        \"id\": 1\n      }\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve total 1500."
+      }
+    },
+    {
+      "name": "13 - Listar pacientes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/paciente",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "paciente"
+          ]
+        }
+      }
+    },
+    {
+      "name": "14 - Actualizar paciente",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/paciente/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "paciente",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Juan Perez (actualizado)\",\n  \"domicilio\": \"Calle 456\",\n  \"celular\": \"2235551234\",\n  \"fechaNacimiento\": \"1990-05-10\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "15 - Listar prestaciones",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/prestacion",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "prestacion"
+          ]
+        }
+      }
+    },
+    {
+      "name": "16 - Actualizar prestacion",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/prestacion/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "prestacion",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"descripcion\": \"Consulta clinica general\",\n  \"categoria\": \"Consultas\",\n  \"stock\": 20\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "17 - Listar listas de precio",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listaprecio"
+          ]
+        }
+      }
+    },
+    {
+      "name": "18 - Actualizar lista de precio",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/listaprecio/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listaprecio",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"descripcion\": \"Lista 2026 actualizada\",\n  \"vigencia\": \"2026-02-01\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "19 - Listar detalles de precio",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio"
+          ]
+        }
+      }
+    },
+    {
+      "name": "20 - Actualizar detalle de precio (id 2)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio",
+            "2"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"listaPrecio\": {\n    \"id\": 1\n  },\n  \"prestacion\": {\n    \"id\": 1\n  },\n  \"precio\": 1600.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "21 - Error: detalle con prestacion inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"listaPrecio\": {\n    \"id\": 1\n  },\n  \"prestacion\": {\n    \"id\": 999\n  },\n  \"precio\": 500.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Devuelve 400 con el mensaje del error."
+      }
+    },
+    {
+      "name": "22 - Eliminar detalle de precio 1 (el viejo)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/detallelistaprecio/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "detallelistaprecio",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "\"Devuelve 204. Los comprobantes ya hechos no cambian.\"",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "23 - Listar comprobantes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/comprobante",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comprobante"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

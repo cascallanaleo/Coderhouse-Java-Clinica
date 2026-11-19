@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class DetalleListaPrecio {
@@ -15,40 +16,20 @@ public class DetalleListaPrecio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetalleListaPrecio;
 
-    private Long idListaPrecio;
-    private Long idPrestacion;
+    @ManyToOne
+    private ListaPrecio listaPrecio;
+
+    @ManyToOne
+    private Prestacion prestacion;
+
     private double precio;
 
     public DetalleListaPrecio() {
     }
 
-    public DetalleListaPrecio(Long idListaPrecio, Long idPrestacion, double precio) {
-        this.idListaPrecio = idListaPrecio;
-        this.idPrestacion = idPrestacion;
-        this.precio = precio;
-    }
-
-    public Long getListaPrecioId() {
-        return idListaPrecio;
-    }
-
-    public void setListaPrecioId(Long idListaPrecio) {
-        this.idListaPrecio = idListaPrecio;
-    }
-
-    public Long getIdPrestacion() {
-        return idPrestacion;
-    }
-
-    public void setIdPrestacion(Long idPrestacion) {
-        this.idPrestacion = idPrestacion;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
+    public DetalleListaPrecio(ListaPrecio listaPrecio, Prestacion prestacion, double precio) {
+        this.listaPrecio = listaPrecio;
+        this.prestacion = prestacion;
         this.precio = precio;
     }
 
@@ -60,12 +41,36 @@ public class DetalleListaPrecio {
         this.idDetalleListaPrecio = id;
     }
 
+    public ListaPrecio getListaPrecio() {
+        return listaPrecio;
+    }
+
+    public void setListaPrecio(ListaPrecio listaPrecio) {
+        this.listaPrecio = listaPrecio;
+    }
+
+    public Prestacion getPrestacion() {
+        return prestacion;
+    }
+
+    public void setPrestacion(Prestacion prestacion) {
+        this.prestacion = prestacion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
     @Override
     public String toString() {
-        return "DetalleListaPrecio{" +  
+        return "DetalleListaPrecio{" +
                 "idDetalleListaPrecio=" + idDetalleListaPrecio +
-                "idListaPrecio=" + idListaPrecio +
-                ", idPrestacion=" + idPrestacion +
+                ", listaPrecio=" + listaPrecio +
+                ", prestacion=" + prestacion +
                 ", precio=" + precio +
                 '}';
     }

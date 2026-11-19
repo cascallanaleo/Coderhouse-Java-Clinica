@@ -13,6 +13,7 @@ public class Prestacion {
     private Long idPrestacion; //guarda el atributo identificador de la Prestacion
     private String descripcion; 
     private String categoria;
+    private int stock; //cantidad disponible de la prestacion (cupos)
 
     public Prestacion() { //constructor vacío requerido por JPA
     }
@@ -38,6 +39,14 @@ public class Prestacion {
         this.descripcion = descripcion;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     public String getCategoria() { 
         return categoria;
     }
@@ -52,6 +61,7 @@ public class Prestacion {
                 "idPrestacion=" + idPrestacion +
                 ", descripcion='" + descripcion + '\'' +
                 ", categoria='" + categoria + '\'' +
+                ", stock=" + stock +
                 '}';
     }
 }

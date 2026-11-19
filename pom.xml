@@ -61,6 +61,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>FacturacionEntregaProyectoFinalCASCALLANA</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
