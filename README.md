@@ -4,20 +4,20 @@ Proyecto final del curso de Java de Coderhouse. Es una API REST hecha con Spring
 
 La consigna pedía un comercio con clientes, productos y ventas. Yo elegí una clínica, así que:
 
-| Consigna | Mi proyecto |
-|---|---|
-| Cliente | Paciente |
-| Producto | Prestación |
-| Stock | Cantidad disponible de la prestación |
-| Venta | Comprobante |
+|Consigna|Mi proyecto|
+|-|-|
+|Cliente|Paciente|
+|Producto|Prestación|
+|Stock|Cantidad disponible de la prestación|
+|Venta|Comprobante|
 
 ## Tecnologías
 
-- Java 17
-- Spring Boot 4.1.1 (Web MVC y Spring Data JPA)
-- Base de datos H2 en memoria
-- Maven
-- Postman para las pruebas
+* Java 17
+* Spring Boot 4.1.1 (Web MVC y Spring Data JPA)
+* Base de datos H2 en memoria
+* Maven
+* Postman para las pruebas
 
 ## Cómo ejecutarlo
 
@@ -41,9 +41,9 @@ La aplicación queda corriendo en `http://localhost:8080`.
 
 La base H2 es en memoria, así que cada vez que se cierra la aplicación se pierden los datos. Las tablas se crean solas al arrancar. Para ver las tablas se puede entrar a `http://localhost:8080/h2-console` con estos datos:
 
-- JDBC URL: `jdbc:h2:mem:clinicadb`
-- Usuario: `sa`
-- Contraseña: (vacía)
+* JDBC URL: `jdbc:h2:mem:clinicadb`
+* Usuario: `sa`
+* Contraseña: (vacía)
 
 ## Estructura
 
@@ -55,18 +55,18 @@ src/main/java/com/clinica
 └── controller   endpoints REST
 entrega/         jar ejecutable
 postman/         colección de Postman
-scripts/         script de creación de tablas (crear_tablas.sql)
+scripts/         script de creación de tablas (crear\_tablas.sql)
 ```
 
 ## Endpoints
 
-| Ruta | POST | GET (lista) | GET por id | PUT | DELETE |
-|---|---|---|---|---|---|
-| `/paciente` | Sí | Sí | Sí | Sí | Sí |
-| `/prestacion` | Sí | Sí | Sí | Sí | Sí |
-| `/listaprecio` | Sí | Sí | Sí | Sí | Sí |
-| `/detallelistaprecio` | Sí | Sí | Sí | Sí | Sí |
-| `/comprobante` | Sí | Sí | Sí | No | No |
+|Ruta|POST|GET (lista)|GET por id|PUT|DELETE|
+|-|-|-|-|-|-|
+|`/paciente`|Sí|Sí|Sí|Sí|Sí|
+|`/prestacion`|Sí|Sí|Sí|Sí|Sí|
+|`/listaprecio`|Sí|Sí|Sí|Sí|Sí|
+|`/detallelistaprecio`|Sí|Sí|Sí|Sí|Sí|
+|`/comprobante`|Sí|Sí|Sí|No|No|
 
 Para actualizar o eliminar se usa el id en la ruta, por ejemplo `PUT /paciente/1` o `DELETE /paciente/1`.
 
@@ -119,7 +119,7 @@ Comprobante:
 ```json
 {
   "paciente": { "id": 1 },
-  "lineas": [
+  "lineas": \[
     {
       "cantidad": 2,
       "prestacion": { "id": 1 }
@@ -155,4 +155,5 @@ Las primeras 12 prueban el flujo del comprobante: alta de datos, venta correcta,
 
 ## Script de tablas
 
-Está en `scripts/crear_tablas.sql`. Es el mismo esquema que genera la aplicación al arrancar.
+Está en `scripts/crear\_tablas.sql`. Es el mismo esquema que genera la aplicación al arrancar. 
+
